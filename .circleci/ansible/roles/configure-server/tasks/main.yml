@@ -86,7 +86,7 @@
 - copy:
     src: /home/ashraf/Documents/udacity-cloud-devops-final-project/util
     dest: /home/ubuntu/
-
+ 
 - name: Run PostgresQL DB
   become: True
   shell:
