@@ -90,9 +90,9 @@
   copy:
     src: /home/ashraf/Documents/udacity-cloud-devops-final-project/util/docker-compose.yml
     dest: /home/ubuntu/
-    owner: ubuntu
-    group: ubuntu
-    mode: '0644'
+    owner: root
+    group: root
+    mode: '777'
 - name: Run PostgresQL DB
   become: True
   shell:
