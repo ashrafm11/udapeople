@@ -88,7 +88,7 @@
 #     dest: /home/ubuntu/
 - name: Copy file with owner and permissions
   copy:
-    src: docker-compose.yml
+    src: ~/util/docker-compose.yml
     dest: /home/ubuntu/
     owner: root
     group: root
@@ -99,4 +99,3 @@
     cmd: "docker-compose -f docker-compose.yml up -d"
     chdir: .
 
-    
