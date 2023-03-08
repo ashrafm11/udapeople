@@ -64,7 +64,7 @@
   remote_user: ubuntu
   apt: 
     name: docker
-    state: present
+    state: lastest
     update_cache: yes
   #notify: Start docker on boot
   tags:
