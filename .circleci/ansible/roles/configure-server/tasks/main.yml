@@ -3,9 +3,9 @@
 #   become: true
 #   apt:
 #     upgrade: "yes"
-- copy:
-      src: /home/ashraf/Documents/udacity-project/util/docker-compose.yml
-      dest: /home/ubuntu
+# - copy:
+#       src: /home/ashraf/Documents/udacity-project/util/docker-compose.yml
+#       dest: /home/ubuntu
       
 - name: "install dependencies."
   become: true
@@ -13,6 +13,9 @@
     name: ["nodejs", "npm"]
     state: latest
     update_cache: yes
+- copy:  
+    src:/home/ashraf/Documents/udacity-project/util/docker-compose.yml
+    dest:/home/ubuntu
 
 - name: "install pm2"
   become: true
