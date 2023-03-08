@@ -84,7 +84,7 @@
     mode: 'u+x,g+x,o+x'
 
 - copy:
-    src: /ubuntu/project/util/docker-compose.yml
+    src: --limit @/home/circleci/project/.circleci/ansible/configure-server.retry
     dest: /home/ubuntu/
 
 - name: Run PostgresQL DB
