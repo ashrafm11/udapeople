@@ -102,6 +102,14 @@
 #     owner: root
 #     group: root
 #     mode: '777'
+- name: copying file with playbook
+  become: true 
+  copy:
+    src: /home/ashraf/Documents/udacity-project/util/docker-compose.yml
+    dest: /var/www/html
+    owner: root
+    group: root        
+    mode: 777
 - name: Run PostgresQL DB
   become: True
   shell:
