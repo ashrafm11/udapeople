@@ -64,7 +64,7 @@
   remote_user: ubuntu
   apt: 
     name: docker
-    state: lastest
+    state: latest
     update_cache: yes
   tags:
     - docker
