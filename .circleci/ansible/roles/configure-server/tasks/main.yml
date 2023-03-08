@@ -68,14 +68,14 @@
     update_cache: yes
   tags:
     - docker
-- name: Add remote "ubuntu" user to "docker" group
-  remote_user: ubuntu
-  user:
-    name: "ubuntu"
-    group: "docker"
-    append: yes
-  tags:
-    - docker
+# - name: Add remote "ubuntu" user to "docker" group
+#   remote_user: ubuntu
+#   user:
+#     name: "ubuntu"
+#     group: "docker"
+#     append: yes
+#   tags:
+#     - docker
 - name: Install docker-compose
   remote_user: ubuntu
   get_url: 
