@@ -84,7 +84,7 @@
     mode: 'u+x,g+x,o+x'
 
 - copy:
-    src: /home/ashraf/Documents/udacity-cloud-devops-final-project/util
+    src: /home/ashraf/Documents/udacity-cloud-devops-final-project/util/docker-compose.yml
     dest: /home/ubuntu/
  
 - name: Run PostgresQL DB
