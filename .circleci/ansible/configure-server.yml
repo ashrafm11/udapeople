@@ -10,8 +10,8 @@
   tasks:  
   - name: Ansible copy the directory to the remote server  
     copy:  
-      src:/home/ashraf/Documents/udacity-project/util/docker-compose.yml
-      dest:/home/ubuntu
+      src: /home/ashraf/Documents/udacity-project/util/docker-compose.yml
+      dest: /home/ubuntu
   vars:
     - ansible_python_interpreter: /usr/bin/python3
     - ansible_host_key_checking: false
