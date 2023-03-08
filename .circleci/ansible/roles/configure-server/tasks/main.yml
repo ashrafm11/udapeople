@@ -62,7 +62,7 @@
     - docker
 - name: Install docker
   remote_user: ubuntu
-  apt:
+  apt: 
     name: docker-ce
     state: present
     update_cache: yes
