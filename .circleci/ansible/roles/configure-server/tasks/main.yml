@@ -104,7 +104,7 @@
 #     mode: '777'
 - name: copy Docker file with playbook 
   become: true
-  copy``: src=docker-compose.yml dest=/home/ubuntu/
+  copy: src=docker-compose.yml dest=/home/ubuntu/
   # copy:
   #   src: /home/ashraf/Documents/udacity-project/util/docker-compose.yml
   #   dest: /var/www/html
