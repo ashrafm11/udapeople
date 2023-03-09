@@ -1,23 +1,129 @@
 ---
-# - name: "upgrade packages."
+# # - name: "upgrade packages."
+# #   become: true
+# #   apt:
+# #     upgrade: "yes"
+# # - copy:
+# #       src: /home/ashraf/Documents/udacity-project/util/docker-compose.yml
+# #       dest: /home/ubuntu
+      
+# - name: "install dependencies."
 #   become: true
 #   apt:
-#     upgrade: "yes"
-# - copy:
-#       src: /home/ashraf/Documents/udacity-project/util/docker-compose.yml
-#       dest: /home/ubuntu
-      
+#     name: ["nodejs", "npm"]
+#     state: latest
+#     update_cache: yes
+
+# # - copy:
+# #     remote_dest: yes
+# #     src: /home/ashraf/Documents/udacity-project/util/docker-compose.yml
+# #     dest: /home/ubuntu
+
+# - name: "install pm2"
+#   become: true
+#   npm:
+#     name: pm2
+#     global: yes
+#     production: yes
+#     state: present
+
+# - name: Install docker packages
+#   remote_user: ubuntu
+#   apt:
+#     name: "{{ item }}"
+#     state: present
+#     update_cache: yes
+#   with_items:
+#     - apt-transport-https
+#     - ca-certificates
+#     - curl
+#     - software-properties-common
+#   tags:
+#     - docker
+# - name: Add Docker s official GPG key
+#   remote_user: ubuntu
+#   apt_key:
+#     url: https://download.docker.com/linux/ubuntu/gpg
+#     state: present
+#   tags:
+#     - docker
+# - name: Verify that we have the key with the fingerprint
+#   remote_user: ubuntu
+#   apt_key:
+#     id: 0EBFCD88
+#     state: present
+#   tags:
+#     - docker
+# # - name: Set up the stable repository
+# #   remote_user: ubuntu
+# #   apt_repository:
+# #     repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu xenial stable
+# #     state: present
+# #     update_cache: yes
+# #   tags:
+# #     - docker
+# - name: Update apt packages
+#   remote_user: ubuntu
+#   apt:
+#     update_cache: yes
+#   tags:
+#     - docker
+# - name: Install docker
+#   remote_user: ubuntu
+#   apt: 
+#     name: docker
+#     state: latest
+#     update_cache: yes
+#   tags:
+#     - docker
+# # - name: Add remote "ubuntu" user to "docker" group
+# #   remote_user: ubuntu
+# #   user:
+# #     name: "ubuntu"
+# #     group: "docker"
+# #     append: yes
+# #   tags:
+# #     - docker
+# - name: Install docker-compose
+#   remote_user: ubuntu
+#   get_url: 
+#     url : https://github.com/docker/compose/releases/download/1.25.1-rc1/docker-compose-Linux-x86_64
+#     dest: /usr/local/bin/docker-compose
+#     mode: 'u+x,g+x,o+x'
+
+# # - copy:
+# #     src: /home/ashraf/Documents/udacity-cloud-devops-final-project/util/docker-compose.yml
+# #     dest: /home/ubuntu/
+# # - name: Copy file with owner and permissions
+# #   copy:
+# #     become: True
+# #     src: '/home/ashraf/Documents/udacity-project/util/docker-compose.yml'
+# #     dest: /home/ubuntu/
+# #     owner: root
+# #     group: root
+# #     mode: '777'
+# - name: copy Docker file with playbook 
+#   become: true
+#   copy: src=docker-compose.yml dest=/home/ubuntu/
+#   # copy:
+#   #   src: /home/ashraf/Documents/udacity-project/util/docker-compose.yml
+#   #   dest: /var/www/html
+#   #   owner: root
+#   #   group: root        
+#   #   mode: 777
+# - name: Run PostgresQL DB
+#   become: True
+#   shell:
+#     cmd: "docker-compose -f docker-compose.yml up -d"
+#     chdir: .
+
+    
 - name: "install dependencies."
   become: true
   apt:
     name: ["nodejs", "npm"]
     state: latest
     update_cache: yes
-
-# - copy:
-#     remote_dest: yes
-#     src: /home/ashraf/Documents/udacity-project/util/docker-compose.yml
-#     dest: /home/ubuntu
 
 - name: "install pm2"
   become: true
@@ -27,63 +133,37 @@
     production: yes
     state: present
 
-- name: Install docker packages
-  remote_user: ubuntu
+
+
+- name: "install docker."
+  become: true
   apt:
-    name: "{{ item }}"
-    state: present
-    update_cache: yes
-  with_items:
-    - apt-transport-https
-    - ca-certificates
-    - curl
-    - software-properties-common
-  tags:
-    - docker
-- name: Add Docker s official GPG key
-  remote_user: ubuntu
-  apt_key:
-    url: https://download.docker.com/linux/ubuntu/gpg
-    state: present
-  tags:
-    - docker
-- name: Verify that we have the key with the fingerprint
-  remote_user: ubuntu
-  apt_key:
-    id: 0EBFCD88
-    state: present
-  tags:
-    - docker
-# - name: Set up the stable repository
-#   remote_user: ubuntu
-#   apt_repository:
-#     repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu xenial stable
-#     state: present
-#     update_cache: yes
-#   tags:
-#     - docker
-- name: Update apt packages
-  remote_user: ubuntu
-  apt:
-    update_cache: yes
-  tags:
-    - docker
-- name: Install docker
-  remote_user: ubuntu
-  apt: 
-    name: docker
+    name: ["docker.io"]
     state: latest
     update_cache: yes
-  tags:
-    - docker
-# - name: Add remote "ubuntu" user to "docker" group
-#   remote_user: ubuntu
+
+# Uncomment the following to enable insecure registries with Docker
+#- name: ensure docker can use insecure registries in 10.11.0.0/16
+#  lineinfile: "dest=/etc/default/docker regexp=^DOCKER_OPTS line=DOCKER_OPTS='--insecure-registry 10.11.0.0/16'"
+
+# sudo usermod -aG docker root
+# - name: "Add remote ubuntu user to docker group"
 #   user:
-#     name: "ubuntu"
-#     group: "docker"
+#     name: ubuntu
+#     groups: docker
 #     append: yes
-#   tags:
-#     - docker
+#   become: true
+
+- name: sudo usermod -aG docker root
+  become: True
+  shell:
+    cmd: "usermod -aG docker ubuntu"
+    chdir: .
+
+# - service: name=docker state=restarted
+#
+
+
 - name: Install docker-compose
   remote_user: ubuntu
   get_url: 
@@ -91,30 +171,12 @@
     dest: /usr/local/bin/docker-compose
     mode: 'u+x,g+x,o+x'
 
-# - copy:
-#     src: /home/ashraf/Documents/udacity-cloud-devops-final-project/util/docker-compose.yml
-#     dest: /home/ubuntu/
-# - name: Copy file with owner and permissions
-#   copy:
-#     become: True
-#     src: '/home/ashraf/Documents/udacity-project/util/docker-compose.yml'
-#     dest: /home/ubuntu/
-#     owner: root
-#     group: root
-#     mode: '777'
-- name: copy Docker file with playbook 
-  become: true
-  copy: src=docker-compose.yml dest=/home/ubuntu/
-  # copy:
-  #   src: /home/ashraf/Documents/udacity-project/util/docker-compose.yml
-  #   dest: /var/www/html
-  #   owner: root
-  #   group: root        
-  #   mode: 777
+- copy:
+    src: docker-compose.yml
+    dest: /home/ubuntu/
+
 - name: Run PostgresQL DB
   become: True
   shell:
     cmd: "docker-compose -f docker-compose.yml up -d"
     chdir: .
-
-    
