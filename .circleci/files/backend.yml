@@ -45,5 +45,5 @@ Resources:
   EIP1:
    Type: AWS::EC2::EIP
    Properties:
-      InstanceID: !Ref EC2Instance
-      
+      InstanceId: 
+        - Ref: EC2Instance   
