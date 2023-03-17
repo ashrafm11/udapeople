@@ -164,7 +164,6 @@ jobs:
               --stack-name "backend" \
               --region us-east-1 \
               --parameter-overrides ID=${CIRCLE_WORKFLOW_ID:0:5}
-
       - run:
           name: Ensure front-end infrastructure exist
           command: |
@@ -362,7 +361,7 @@ workflows:
           requires: [build-backend]
       - scan-frontend:
           requires: [build-frontend]
-      - deploy-infrastructure
+      - deploy-infrastructure:
           requires: [test-frontend, test-backend, scan-frontend, scan-backend]
           filters:
             branches: 
