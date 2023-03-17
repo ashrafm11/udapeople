@@ -32,7 +32,7 @@
   roles:
     - configure-prometheus-node-exporter
     - configure-server
-    - deploy
+    # - deploy
 
 
 
