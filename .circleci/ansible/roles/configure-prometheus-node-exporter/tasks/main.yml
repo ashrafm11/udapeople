@@ -20,7 +20,7 @@
 - name: "move binary to /usr/local/bin."
   become: true
   copy:
-    src: /tmp/node_exporter-1.5.0.darwin-amd64.tar.gz/node_exporter
+    src: /tmp/node_exporter-1.5.0.darwin-amd64.tar.gz
     dest: /usr/local/bin/node_exporter
     remote_src: yes
     mode: '0777'
