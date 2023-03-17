@@ -45,7 +45,7 @@
 - name: "copy backend file"
   become: true
   copy:
-    src: /root/project/backend
+    src: ~/project/backend
     dest: /root
     force: no
 - name: "install npm packages"
