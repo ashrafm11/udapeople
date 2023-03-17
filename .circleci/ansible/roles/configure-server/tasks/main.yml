@@ -45,8 +45,7 @@
   shell:
     cmd: "usermod -aG docker ubuntu"
     chdir: .
-
-# - service: name=docker state=restarted
+    
 - name: Install docker-compose
   remote_user: ubuntu
   get_url: 
