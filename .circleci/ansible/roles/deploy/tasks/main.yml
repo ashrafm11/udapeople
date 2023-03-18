@@ -55,7 +55,9 @@
     chdir: /root/backend
 - name: "compile npm packages"
   become: true
-  command: npm run build
+  shell:
+    cmd: "npm run build"
+  # command: npm run build
   args:
     chdir: /root/backend
 - name: "start server"
