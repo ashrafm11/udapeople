@@ -42,11 +42,11 @@
     global: yes
     production: yes
     state: present
-# - name: "copy backend file"
-#   become: true
-#   copy:
-#     src: ~/project/backend
-#     dest: /root
+- name: "copy backend file"
+  become: true
+  copy:
+    src: ~/project/backend
+    dest: /root
 #     force: no
 - name: "install npm packages"
   become: true
