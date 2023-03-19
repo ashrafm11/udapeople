@@ -323,6 +323,7 @@ jobs:
             aws cloudformation deploy \
               --template-file .circleci/files/cloudfront.yml \
               --parameter-overrides WorkflowID="${CIRCLE_WORKFLOW_ID:0:5}" \
+              --region us-east-1 \
               --stack-name InitialStack
 
 
