@@ -340,6 +340,7 @@ jobs:
             then
               aws s3 rm "s3://udapeople-${OldWorkflowID}" --recursive
               aws cloudformation delete-stack --stack-name "backend-${OldWorkflowID}"
+              --region us-east-1 \
               aws cloudformation delete-stack --stack-name "frontend-${OldWorkflowID}"
             fi
             
