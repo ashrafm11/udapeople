@@ -6,6 +6,9 @@ orbs:
   node: circleci/node:5.1.0
   slack: circleci/slack@4.1
     #slack: circleci/slack@4.10.1
+orbs:
+  node: circleci/node@5.1.0
+  slack: circleci/slack@4.12.1
 
 commands:
   destroy_environment:
