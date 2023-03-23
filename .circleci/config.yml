@@ -1,11 +1,4 @@
 version: 2.1
-# orbs:
-#   node: 'circleci/node:4.1'
-#   slack: circleci/slack@4.1
-# orbs: 
-#   node: circleci/node:5.1.0
-#   slack: circleci/slack@4.1
-#     #slack: circleci/slack@4.10.1
 orbs:
   node: circleci/node@5.1.0
   slack: circleci/slack@4.12.1
@@ -78,7 +71,7 @@ jobs:
       - save_cache:
           paths: [frontend/node_modules]
           key: frontend-build
-      - notify_on_success
+    - notify_on_success
 
   build-backend:
     docker:
