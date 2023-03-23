@@ -71,10 +71,10 @@ jobs:
       - save_cache:
           paths: [frontend/node_modules]
           key: frontend-build
-      - slack/notify:
-          event: pass
-          channel: $SLACK_DEFAULT_CHANNEL
-          template: basic_fail_1
+    #  - slack/notify:
+    #       event: fail
+    #       channel: $SLACK_DEFAULT_CHANNEL
+    #       template: basic_fail_1
 
   build-backend:
     docker:
