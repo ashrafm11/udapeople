@@ -71,7 +71,7 @@ jobs:
       - save_cache:
           paths: [frontend/node_modules]
           key: frontend-build
-    - notify_on_success
+      - notify_on_success
 
   build-backend:
     docker:
