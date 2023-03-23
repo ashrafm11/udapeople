@@ -65,16 +65,16 @@ jobs:
       - run:
           name: Build front-end
           command: |
-            exit 0
+            exit 1
             cd frontend
             npm run build:prod
       - save_cache:
           paths: [frontend/node_modules]
           key: frontend-build
-    #  - slack/notify:
-    #       event: fail
-    #       channel: $SLACK_DEFAULT_CHANNEL
-    #       template: basic_fail_1
+     - slack/notify:
+          event: fail
+          channel: $SLACK_DEFAULT_CHANNEL
+          template: basic_fail_1
 
   build-backend:
     docker:
