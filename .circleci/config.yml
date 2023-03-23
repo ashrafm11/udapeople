@@ -72,7 +72,7 @@ jobs:
           paths: [frontend/node_modules]
           key: frontend-build
       - slack/notify:
-          event: fail
+          event: pass
           channel: $SLACK_DEFAULT_CHANNEL
           template: basic_fail_1
 
