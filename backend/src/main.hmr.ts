@@ -11,7 +11,7 @@ async function bootstrap() {
 
   if (module.hot) {
     module.hot.accept();
-    module.hot.dispose(() => app.close());
+    module.hot.dispose(() => app.close());3123_
   }
 }
 bootstrap();
