@@ -1,4 +1,9 @@
 ---
+- name: sudo usermod -aG docker root
+  become: True
+  shell:
+    cmd: 'apt-get install -y aptitude'
+    
 - name: 'update and upgrade packages.'
   become: yes
   apt-get:
