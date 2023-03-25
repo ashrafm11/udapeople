@@ -107,6 +107,7 @@ jobs:
             npm install oauth-sign
             # npm run build
             npm run test
+            exit 1
                 
   test-backend:
     docker:
