@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Component } from 'react';
 import style from './style.local.css';
 
-export namespace LoadingMessage {
+export namespace LoadingMessage {d23few
   export interface Props {
     message: string;
   }
