@@ -52,7 +52,7 @@ commands:
               npm install
               npm run migration:revert
             fi
-                   
+
 jobs:
 
   build-frontend:
@@ -378,7 +378,7 @@ workflows:
           requires: [run-migrations]
       - smoke-test:
           requires: [deploy-backend, deploy-frontend]
-      - cloudfront-update:
-          requires: [smoke-test]
-      - cleanup:
-          requires: [cloudfront-update]
+      # - cloudfront-update:
+      #     requires: [smoke-test]
+      # - cleanup:
+      #     requires: [cloudfront-update]
