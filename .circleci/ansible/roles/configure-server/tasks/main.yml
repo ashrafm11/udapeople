@@ -1,18 +1,19 @@
 ---
-- name: sudo usermod -aG docker root
+- name: INSTALL APT
   become: True
   shell:
     cmd: 'apt-get install -y aptitude'
-    
-- name: 'update and upgrade packages.'
+
+- name: 'update and upgrade packages'
   become: yes
-  apt-get:
+  apt:
     upgrade: yes
     update_cache: yes
     cache_valid_time: 86400
+
 - name: remove unneeded deps
   become: yes
-  apt-get:
+  apt:
     autoremove: yes
 
 - name: "install dependencies."
