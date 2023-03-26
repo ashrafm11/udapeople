@@ -149,6 +149,7 @@ jobs:
             exit 0
             npm audit
 
+
   deploy-infrastructure:
     docker:
       - image: amazon/aws-cli
