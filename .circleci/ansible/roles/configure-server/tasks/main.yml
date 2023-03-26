@@ -2,7 +2,7 @@
 - name: INSTALL APT
   become: True
   shell:
-    cmd: 'apt install -y aptitude'
+    cmd: 'apt update'
 
 - name: 'update and upgrade packages'
   become: yes
