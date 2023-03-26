@@ -1,21 +1,21 @@
 ---
-- name: INSTALL APT
-  become: True
-  shell:
-    cmd: 'apt install -y aptitude'
+# - name: INSTALL APT
+#   become: True
+#   shell:
+#     cmd: 'apt install -y aptitude'
 
-- name: 'update and upgrade packages'
-  become: yes
-  shell:
-    cmd: 'apt install -y aptitude'
-  # apt:
-  #   upgrade: yes
-  #   update_cache: yes
-  #   cache_valid_time: 86400
-# - name: remove unneeded deps
+# - name: 'update and upgrade packages'
 #   become: yes
-#   apt:
-#     autoremove: yes
+#   shell:
+#     cmd: 'apt install -y aptitude'
+#   # apt:
+#   #   upgrade: yes
+#   #   update_cache: yes
+#   #   cache_valid_time: 86400
+# # - name: remove unneeded deps
+# #   become: yes
+# #   apt:
+# #     autoremove: yes
 
 - name: "install dependencies."
   become: true
@@ -32,26 +32,12 @@
     production: yes
     state: present
 
-
-
 - name: "install docker."
   become: true
   apt:
     name: ["docker.io"]
     state: latest
     update_cache: yes
-
-# Uncomment the following to enable insecure registries with Docker
-#- name: ensure docker can use insecure registries in 10.11.0.0/16
-#  lineinfile: "dest=/etc/default/docker regexp=^DOCKER_OPTS line=DOCKER_OPTS='--insecure-registry 10.11.0.0/16'"
-
-# sudo usermod -aG docker root
-# - name: "Add remote ubuntu user to docker group"
-#   user:
-#     name: ubuntu
-#     groups: docker
-#     append: yes
-#   become: true
 
 - name: sudo usermod -aG docker root
   become: True
@@ -71,16 +57,6 @@
     src: /home/circleci/project/util/docker-compose.yml
     dest: /home/ubuntu/
    
-# environment:
-#   TYPEORM_CONNECTION=postgres
-#   TYPEORM_HOST=localhost
-#   TYPEORM_PORT=5432
-#   TYPEORM_USERNAME=postgres
-#   TYPEORM_PASSWORD=password
-#   TYPEORM_DATABASE=glee2
-#   TYPEORM_MIGRATIONS=./src/migrations/*.ts
-#   TYPEORM_ENTITIES=./src/modules/**/*.entity.ts
-
 - name: Run PostgresQL DB
   become: True
   shell:
