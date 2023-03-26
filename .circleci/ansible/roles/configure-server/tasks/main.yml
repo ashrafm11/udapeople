@@ -2,14 +2,16 @@
 - name: INSTALL APT
   become: True
   shell:
-    cmd: 'apt update'
+    cmd: 'apt install -y aptitude'
 
 - name: 'update and upgrade packages'
   become: yes
-  apt:
-    upgrade: yes
-    update_cache: yes
-    cache_valid_time: 86400
+  shell:
+    cmd: 'apt install -y aptitude'
+  # apt:
+  #   upgrade: yes
+  #   update_cache: yes
+  #   cache_valid_time: 86400
 
 # - name: remove unneeded deps
 #   become: yes
