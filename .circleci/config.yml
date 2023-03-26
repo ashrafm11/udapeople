@@ -295,7 +295,7 @@ jobs:
             if curl -s --head ${URL}
             then
               echo "It worked!"
-              exit 1
+              exit 0
             else
               echo "Rolling Back"
               exit 1
@@ -368,16 +368,16 @@ workflows:
           # filters:
           #   branches: 
           #     only: [main]
-      - configure-infrastructure:
-          requires: [deploy-infrastructure]
-      - run-migrations:
-          requires: [configure-infrastructure]
-      - deploy-frontend:
-          requires: [run-migrations]
-      - deploy-backend:
-          requires: [run-migrations]
-      - smoke-test:
-          requires: [deploy-backend, deploy-frontend]
+      # - configure-infrastructure:
+      #     requires: [deploy-infrastructure]
+      # - run-migrations:
+      #     requires: [configure-infrastructure]
+      # - deploy-frontend:
+      #     requires: [run-migrations]
+      # - deploy-backend:
+      #     requires: [run-migrations]
+      - smoke-test
+          # requires: [deploy-backend, deploy-frontend]
       - cloudfront-update:
           requires: [smoke-test]
       - cleanup:
