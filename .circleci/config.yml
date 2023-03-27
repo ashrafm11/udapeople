@@ -350,7 +350,7 @@ jobs:
   #             region us-east-1 
   #             aws cloudformation delete-stack --stack-name --region us-east-1 "frontend"
   #           fi
-     cleanup: 
+  cleanup: 
     docker:
       - image: amazon/aws-cli
     steps:
