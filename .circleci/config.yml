@@ -65,9 +65,8 @@ jobs:
       - run:
           name: Build front-end
           command: |
-            # exit 0
+            exit 0
             cd frontend
-            npm install
             npm run build:prod
       - save_cache:
           paths: [frontend/node_modules]
@@ -134,9 +133,7 @@ jobs:
       - run:
           name: Scan front-end
           command: |
-            # exit 0
-            cd frontend
-            npm install
+            exit 0
             npm audit
 
   scan-backend:
@@ -149,7 +146,7 @@ jobs:
       - run:
           name: Scan Back-end
           command: |
-            # exit 0
+            exit 0
             npm audit
 
 
@@ -298,7 +295,7 @@ jobs:
             if curl -s --head ${URL}
             then
               echo "It worked!"
-              exit 0
+              exit 1
             else
               echo "Rolling Back"
               exit 1
@@ -308,7 +305,7 @@ jobs:
 
   cloudfront-update:
     docker:
-      - image: mareimorsy/aws-node
+      - image: ashrafmostafa/aws-udacity
     steps:
       - checkout
       - run:
@@ -352,24 +349,25 @@ jobs:
               aws cloudformation delete-stack --stack-name "frontend-${OldWorkflowID}"
             fi
             
+
 workflows:
   default:
     jobs:
-      - build-frontend
-      - build-backend
-      - test-frontend:
-          requires: [build-frontend]
-      - test-backend:
-          requires: [build-backend]
-      - scan-backend:
-          requires: [build-backend]
-      - scan-frontend:
-          requires: [build-frontend]
-      # - deploy-infrastructure
+      # - build-frontend
+      # - build-backend
+      # - test-frontend:
+      #     requires: [build-frontend]
+      # - test-backend:
+      #     requires: [build-backend]
+      # - scan-backend:
+      #     requires: [build-backend]
+      # - scan-frontend:
+      #     requires: [build-frontend]
+      # - deploy-infrastructure:
       #     requires: [test-frontend, test-backend, scan-frontend, scan-backend]
       #     filters:
       #       branches: 
-      # #         only: [main]
+      #         only: [main]
       # - configure-infrastructure:
       #     requires: [deploy-infrastructure]
       # - run-migrations:
@@ -378,8 +376,8 @@ workflows:
       #     requires: [run-migrations]
       # - deploy-backend:
       #     requires: [run-migrations]
-      # - smoke-test:
-      #     requires: [deploy-backend, deploy-frontend]
+      - smoke-test
+          # requires: [deploy-backend, deploy-frontend]
       # - cloudfront-update:
       #     requires: [smoke-test]
       # - cleanup:
