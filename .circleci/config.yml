@@ -135,7 +135,7 @@ jobs:
           name: Scan front-end
           command: |
             # exit 0
-            cd front-end
+            cd frontend
             np install
             npm audit
 
