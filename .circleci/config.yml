@@ -372,7 +372,7 @@ jobs:
             echo "${STACKS}"        
             echo "Delete old backend stack"              
             aws cloudformation delete-stack --stack-name backend-${OldWorkflowID}   
-
+ 
 workflows:
   default:
     jobs:
@@ -406,4 +406,3 @@ workflows:
       - cleanup:
           requires: [cloudfront-update]
 
-          
