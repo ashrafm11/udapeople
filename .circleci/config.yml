@@ -136,7 +136,7 @@ jobs:
           command: |
             # exit 0
             cd frontend
-            np install
+            npm install
             npm audit
 
   scan-backend:
