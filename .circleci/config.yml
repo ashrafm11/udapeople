@@ -305,7 +305,7 @@ jobs:
 
   cloudfront-update:
     docker:
-      - image: ashrafmostafa/aws-udacity
+      - image: mareimorsy/aws-node
     steps:
       - checkout
       - run:
