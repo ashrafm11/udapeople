@@ -230,7 +230,6 @@ jobs:
       #       # Your code here
       #       exit 1
      # Here's where you will add some code to rollback on failure      
-
   deploy-frontend:
     docker:
       - image: mareimorsy/aws-node
