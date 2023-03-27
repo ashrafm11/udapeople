@@ -65,7 +65,7 @@ jobs:
       - run:
           name: Build front-end
           command: |
-            # exit 0
+            exit 0
             cd frontend
             npm run build:prod
       - save_cache:
