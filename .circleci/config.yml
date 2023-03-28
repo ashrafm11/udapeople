@@ -18,7 +18,6 @@ commands:
             aws cloudformation delete-stack --stack-name backend-${CIRCLE_WORKFLOW_ID:0:5}
             aws cloudformation delete-stack --stack-name frontend-<< parameters.Workflow_ID >>
             aws s3 rm s3://udapeople-edea1 --recursive
-
   notify_on_failure:
       steps:
         - slack/notify:
