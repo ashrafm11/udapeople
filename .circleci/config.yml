@@ -19,18 +19,17 @@ commands:
             aws cloudformation delete-stack --stack-name frontend-<< parameters.Workflow_ID >>
             aws s3 rm s3://udapeople-edea1 --recursive
   notify_on_failure:
-      steps:
-        - slack/notify:
-            event: fail
-            channel: $SLACK_DEFAULT_CHANNEL
-            template: basic_fail_1
+    steps:
+      - slack/notify:
+          event: fail
+          channel: $SLACK_DEFAULT_CHANNEL
+          template: basic_fail_1
   notify_on_success:
-      steps:
-        - slack/notify:
-            event: pass
-            channel: $SLACK_DEFAULT_CHANNEL
-            template: success_tagged_deployment_1
-
+    steps:
+      - slack/notify:
+          event: pass
+          channel: $SLACK_DEFAULT_CHANNEL
+          template: success_tagged_deployment_1
 
   revert-migrations:
     description: Revert the last migration
@@ -52,9 +51,8 @@ commands:
               npm install
               npm run migration:revert
             fi
-                   
-jobs:
 
+jobs:
   build-frontend:
     docker:
       - image: circleci/node:13.8.0
@@ -108,7 +106,7 @@ jobs:
             # npm run build
             npm run test
             exit 0
-                
+
   test-backend:
     docker:
       - image: circleci/node:13.8.0
@@ -122,7 +120,7 @@ jobs:
             exit 0
             cd backend
             npm run test
-            
+
   scan-frontend:
     docker:
       - image: circleci/node:13.8.0
@@ -148,7 +146,6 @@ jobs:
           command: |
             exit 0
             npm audit
-
 
   deploy-infrastructure:
     docker:
@@ -194,7 +191,7 @@ jobs:
       - checkout
       - add_ssh_keys:
           fingerprints: ["ca:c5:ff:cf:cf:2c:9d:53:74:ee:8d:40:fb:33:30:91"]
-      
+
       - attach_workspace:
           at: ~/
       - run:
@@ -207,10 +204,9 @@ jobs:
             cat inventory.txt
             ansible-playbook -i inventory.txt configure-server.yml -vv
             # ansible-playbook -i inventory.txt deploy-backend.yml -vv
-      
 
   run-migrations:
-    docker: 
+    docker:
       - image: mareimorsy/aws-node
     steps:
       - checkout
@@ -228,7 +224,7 @@ jobs:
       #     command: |
       #       # Your code here
       #       exit 1
-     # Here's where you will add some code to rollback on failure      
+      # Here's where you will add some code to rollback on failure
   deploy-frontend:
     docker:
       - image: mareimorsy/aws-node
@@ -247,8 +243,8 @@ jobs:
             # aws s3 sync dist s3://udapeople-project
             aws s3 cp dist s3://udapeople-${CIRCLE_WORKFLOW_ID:0:5} --recursive
 
-#       # Here's where you will add some code to rollback on failure      
-                    
+  #       # Here's where you will add some code to rollback on failure
+
   deploy-backend:
     docker:
       - image: mareimorsy/aws-node
@@ -277,7 +273,7 @@ jobs:
             ls ../.circleci/ansible/roles/deploy/
             cd ../.circleci/ansible
             ansible-playbook -i inventory.txt deploy-backend.yml
-      # Here's where you will add some code to rollback on failure  
+      # Here's where you will add some code to rollback on failure
 
   smoke-test:
     docker:
@@ -288,7 +284,7 @@ jobs:
           name: Backend smoke test.
           command: |
             export BACKEND_PUBLIC_IP=$(aws ec2 describe-instances --region us-east-1 --query 'Reservations[*].Instances[*].PublicIpAddress' --output text)
-            
+
             URL="http://$BACKEND_PUBLIC_IP:3030/api/status"
             # URL="http://g00gle.com"
             if curl -s --head ${URL}
@@ -365,15 +361,14 @@ jobs:
             export OldWorkflowID=$(curl --insecure https://kvdb.io/${KVDB_BUCKET}/old_workflow_id)
             echo Stack names: "${STACKS[@]}"
             echo Old Workflow ID: $OldWorkflowID 
-  
+
             if [[ "${STACKS[@]}" =~ "${OldWorkflowID}" ]]
             then
               aws s3 rm s3://udapeople-${OldWorkflowID} --recursive
               aws cloudformation delete-stack --stack-name --region us-east-1  "backend"
               aws cloudformation delete-stack --stack-name --region us-east-1 "frontend"
             fi
-  
- 
+
 workflows:
   default:
     jobs:
@@ -390,7 +385,7 @@ workflows:
       - deploy-infrastructure:
           requires: [test-frontend, test-backend, scan-frontend, scan-backend]
           filters:
-            branches: 
+            branches:
               only: [main]
       - configure-infrastructure:
           requires: [deploy-infrastructure]
@@ -406,4 +401,3 @@ workflows:
           requires: [smoke-test]
       - cleanup:
           requires: [cloudfront-update]
-
