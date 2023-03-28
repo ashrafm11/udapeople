@@ -360,8 +360,9 @@ jobs:
             --no-paginate --output text)
             export STACKS=($(aws cloudformation list-stacks \
                 --query "StackSummaries[*].StackName" \
-                --region us-east-1
-                --stack-status-filter CREATE_COMPLETE --no-paginate --output text)) 
+                --stack-status-filter CREATE_COMPLETE \
+                --region us-east-1 \
+                --no-paginate --output text)) 
             export OldWorkflowID=$(curl --insecure https://kvdb.io/${KVDB_BUCKET}/old_workflow_id)
             echo Stack names: "${STACKS[@]}"
             echo Old Workflow ID: $OldWorkflowID 
