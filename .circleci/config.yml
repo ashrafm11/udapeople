@@ -338,8 +338,8 @@ jobs:
           command: |
             export STACKS=($(aws cloudformation list-stacks \
                 --query "StackSummaries[*].StackName" \
-                --region us-east-1 
-                --stack-status-filter CREATE_COMPLETE --no-paginate --output text)) 
+                --region us-east-1)) 
+                # --stack-status-filter CREATE_COMPLETE --no-paginate --output text)) 
             echo Stack names: "${STACKS[@]}"
             export OldWorkflowID=$(curl --insecure https://kvdb.io/${KVDB_BUCKET}/old_workflow_id)
             echo Old Workflow ID: $OldWorkflowID 
@@ -347,7 +347,6 @@ jobs:
             then
               aws s3 rm s3://udapeople-${OldWorkflowID} --recursive
               aws cloudformation delete-stack --stack-name --region us-east-1  "backend"
-              region us-east-1 
               aws cloudformation delete-stack --stack-name --region us-east-1 "frontend"
             fi
   # cleanup: 
